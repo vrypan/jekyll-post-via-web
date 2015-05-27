@@ -5,5 +5,5 @@ A simple HTML+JS page that allows you to post new articles to your GitHub-hosted
 If you host your Jekyll blog on GitHub, you can use jekyll-web-post to post new articles from a browser.
 
 ## Installation
-Just copy cms.js to the root of your Jekyll blog source, and deploy. Then visit the page using your web browser
+Just copy cms.html to the root of your Jekyll blog source, and deploy. Then visit the page using your web browser
 (for example `http://<username>.github.io/cms.html` ).
