@@ -6,4 +6,4 @@ If you host your Jekyll blog on GitHub, you can use jekyll-web-post to post new 
 
 ## Installation
 Just copy cms.js to the root of your Jekyll blog source, and deploy. Then visit the page using your web browser
-(for example `http://<username>.github.io/cms.js` ).
+(for example `http://<username>.github.io/cms.html` ).
