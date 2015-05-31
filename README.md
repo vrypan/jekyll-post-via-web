@@ -9,10 +9,19 @@ You can find more details here: [Post to your GitHub-hosted blog using a simple 
 Just copy cms.html to the root of your Jekyll blog source, and deploy. Then visit the page using your web browser, 
 usually at `<url>/<base_url>/cms.html`.
 
+Make sure you have `github.repo` and `github.branch` set in `_config.yml`. This is the repository and branch holding your
+blog's source. For example:
+```
+github:
+  repo: vrypan/vrypan.github.io
+  branch: master
+```
+
 ## Support this project
 I've worked on jekyll-post-via-web by "stealing" time from my main project, [BigStash](https://www.bigstash.co).
-So, **if you'd like to support me, just have a look at my company's blog, [blog.bigstash.co](http://blog.bigstash.co)**
-&mdash;it would mean a lot to me. Thank you!
+
+**If you'd like to support this project***, just have a look at my company's blog, [blog.bigstash.co](http://blog.bigstash.co)
+&mdash;just visiting would mean a lot to me. Thank you!
 
 ## Copyright
 Panayotis Vryonis, [vrypan.net](https://www.vrypan.net)

@@ -15,9 +15,16 @@
 </head>
 
 <body>
-	
 	<div class="container" id="container1" >
 	<h5>Create new post at {{ site.title }}</h5>
+	{% if site.github.repo == none %}
+		<div class="alert alert-danger" role="alert"><code>github.repo</code> is not set. Check <a href="https://github.com/vrypan/jekyll-post-via-web"
+		>github.com/vrypan/jekyll-post-via-web</a> for instructions.</div>
+	{% endif %}
+	{% if site.github.branch == none %}
+		<div class="alert alert-danger" role="alert"><code>github.branch</code> is not set. Check <a href="https://github.com/vrypan/jekyll-post-via-web"
+		>github.com/vrypan/jekyll-post-via-web</a> for instructions.</div>
+	{% endif %}
 	<div id="messages"></div>
 	<form id="theform" method="get">
 		<div class="form-group">
@@ -107,7 +114,7 @@
 		return d.toISOString()
 	}
 
-	var API_NEW_POST = 'https://api.github.com/repos/{{ site.github_username }}/{{ site.github_username }}.github.io/contents/_posts/' ;
+	var API_NEW_POST = 'https://api.github.com/repos/{{ site.github.repo }}/contents/_posts/' ;
 
 	$("#go").click(function() {
 		var user = $('#username').val() ;
@@ -132,7 +139,8 @@
 	        type: "PUT",
 	        data: JSON.stringify({
 	        	content: btoa(unescape(encodeURIComponent(p_body))),
-	        	message: 'posted via web' 
+	        	message: 'posted via web',
+	        	branch: '{{ site.github.branch }}'
 	        }),
 	        beforeSend: function(xhr) { 
 	        	xhr.setRequestHeader("Authorization", "Basic " + btoa(user+":"+password)); 
