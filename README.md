@@ -20,7 +20,7 @@ github:
 ## Support this project
 I've worked on jekyll-post-via-web by "stealing" time from my main project, [BigStash](https://www.bigstash.co).
 
-**If you'd like to support this project***, just have a look at my company's blog, [blog.bigstash.co](http://blog.bigstash.co)
+**If you'd like to support this project**, just have a look at my company's blog, [blog.bigstash.co](http://blog.bigstash.co)
 &mdash;just visiting would mean a lot to me. Thank you!
 
 ## Copyright
