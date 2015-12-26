@@ -92,16 +92,16 @@
 	function post_file(title) {
 		var d = new Date()
 		var dd = d.getDate()
-		if ( dd < 10 ) dd = '0' + dd ;
+		if (dd < 10) dd = '0' + dd ;
 		var mm = d.getMonth()+1 ;
-		if ( mm < 10 ) mm = '0' + mm ;
+		if (mm < 10) mm = '0' + mm ;
 		var yyyy = d.getFullYear() ;
-		filename = yyyy+'-'+mm+'-'+dd ;
+		filename = yyyy + '-' + mm + '-' + dd ;
 		if (!title) {
 			filename = filename + '-' + +d.getTime() ;
 		} else {
 			var slugified = title.toLowerCase().replace(/\W+/g, '-') ;
-			if (slugified!='-') {
+			if (slugified != '-') {
 				filename = filename + '-' + slugified ;
 			} else {
 				filename = filename + '-' + d.getTime();
@@ -157,7 +157,6 @@
 				.append('<br>If you are using two-factor authentication, you will have to create ')
 				.append('<a href="https://github.com/settings/tokens">a personal access token</a> with "repo" permissions and use this instead of your password.')
 				.append('</div>'));
-
 			},
 		});
 	});
@@ -181,6 +180,5 @@
 		}
 		$('#p_body').val(src_body) ;
 	}
-
 	</script>
 </body>
