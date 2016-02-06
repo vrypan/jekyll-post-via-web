@@ -11,7 +11,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	
+
 </head>
 
 <body>
@@ -42,17 +42,17 @@
 				<label for="password" class="sr-only">password</label>
 				<input type="password" class="form-control" id="password" placeholder="GitHub password">
 			</div>
-			<input type="button" class="btn btn-default" id="go" value="Post" /> 
+			<input type="button" class="btn btn-default" id="go" value="Post" />
 			<a class="btn btn-link" data-toggle="collapse" href="#submitform" aria-expanded="false" aria-controls="submitform">Remember username/password</a>
 		</div>
 		<div class="collapse" id="submitform">
-		<br>
-	  	<div class="well">
-	    	<p>Because of the way this form works (the form data is not sumbitted, as forms usually do), your browser may not ask you to remember the username/password. 
-	    	<br>If you'd like to save them to your password manager, fill them in and click this button.
-	    	<br>This will not create a new post!</p>
-	    	<input type="submit" class="btn btn-default" value="Trick browser to save username/password">
-	  	</div>
+			<br>
+			<div class="well">
+				<p>Because of the way this form works (the form data is not sumbitted, as forms usually do), your browser may not ask you to remember the username/password.
+				<br>If you'd like to save them to your password manager, fill them in and click this button.
+				<br>This will not create a new post!</p>
+				<input type="submit" class="btn btn-default" value="Trick browser to save username/password">
+			</div>
 		</div>
 	</form>
 
@@ -61,9 +61,9 @@
 	title = encodeURIComponent(title) ;
 	var selection = '';
 	if (window.getSelection) {
-	    selection = window.getSelection().toString();
+		selection = window.getSelection().toString();
 	} else if (document.selection &amp;&amp; document.selection.type != 'Control') {
-	    selection = document.selection.createRange().text;
+		selection = document.selection.createRange().text;
 	}
 	selection = encodeURIComponent(selection);
 	new_window=window.open('{{ "/cms.html" | prepend: site.baseurl | prepend: site.url }}?title='+title+'&amp;selection='+selection+'&amp;url='+encodeURIComponent(document.location.href),'JekyllPopup','resizable,scrollbars,status=0,toolbar=0,menubar=0,titlebar=0,width=640,height=600,location=0');
@@ -74,34 +74,34 @@
 	<script>
 	function get_query(){
 		// Source: http://fellowtuts.com/jquery/getting-query-string-values-in-javascript/
-	    var url = document.location.href;
-	    if (url.indexOf('?') == -1) return false ;
-	    var qs = url.substring(url.indexOf('?') + 1).split('&');
-	    for(var i = 0, result = {}; i < qs.length; i++){
-	        qs[i] = qs[i].split('=');
-	        result[qs[i][0]] = decodeURIComponent(qs[i][1].replace(/\+/g, '%20'));
-	    }
-	    return result;
+		var url = document.location.href;
+		if (url.indexOf('?') == -1) return false ;
+		var qs = url.substring(url.indexOf('?') + 1).split('&');
+		for(var i = 0, result = {}; i < qs.length; i++){
+			qs[i] = qs[i].split('=');
+			result[qs[i][0]] = decodeURIComponent(qs[i][1].replace(/\+/g, '%20'));
+		}
+		return result;
 	}
 
 	function getSelectionText() {
-		
+
 		return text;
 	}
 
 	function post_file(title) {
 		var d = new Date()
 		var dd = d.getDate()
-		if ( dd < 10 ) dd = '0' + dd ;
+		if (dd < 10) dd = '0' + dd ;
 		var mm = d.getMonth()+1 ;
-		if ( mm < 10 ) mm = '0' + mm ;
+		if (mm < 10) mm = '0' + mm ;
 		var yyyy = d.getFullYear() ;
-		filename = yyyy+'-'+mm+'-'+dd ;
+		filename = yyyy + '-' + mm + '-' + dd ;
 		if (!title) {
 			filename = filename + '-' + +d.getTime() ;
 		} else {
 			var slugified = title.toLowerCase().replace(/\W+/g, '-') ;
-			if (slugified!='-') {
+			if (slugified != '-') {
 				filename = filename + '-' + slugified ;
 			} else {
 				filename = filename + '-' + d.getTime();
@@ -126,41 +126,39 @@
 		p_body = p_body + 'title:  "' + title +'" \n';
 		p_body = p_body + 'date:   '+ post_date() +' \n' ;
 		/* Setting the category here is not the most elegant way...
-		p_body = p_body + 'categories: tests \n'; 
+		p_body = p_body + 'categories: tests \n';
 		*/
 		p_body = p_body + '---\n';
 		p_body = p_body + '\n' + $('#p_body').val();
 
-		var posted_ok = false ;
-	    $.ajax({
-	        dataType: "json",
-	        contentType: 'application/json; charset=UTF-8',
-	        url: API_NEW_POST+post_file(title)+'.markdown',
-	        type: "PUT",
-	        data: JSON.stringify({
-	        	content: btoa(unescape(encodeURIComponent(p_body))),
-	        	message: 'posted via web',
-	        	branch: '{{ site.github.branch }}'
-	        }),
-	        beforeSend: function(xhr) { 
-	        	xhr.setRequestHeader("Authorization", "Basic " + btoa(user+":"+password)); 
-	    	},
-	        success: function(data) {
-	        	posted_ok = true ;
-	        	$('#container1').html('<h2>Successfully posted to {{ site.title }}</h2') ;
-	        },
-	        error: function(request, status, error) {
-	        	responseText = jQuery.parseJSON( request.responseText );
-        		$('#messages').append($('<div class="alert alert-danger alert-dismissible" role="alert">')
-        		.append('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
-        		.append('<strong>' + request.status + '</strong>: ' + responseText.message )
-        		.append('<br>If you are using two-factor-auth, you will ahve to create ')
-        		.append('<a href="https://github.com/settings/tokens">a personal access token</a> with "repo" permissions and use this instead of your password.')
-        		.append('</div>'));
-	        	
-	        },
-	      })
-	       ;
+		var posted_ok = false;
+		$.ajax({
+			dataType: "json",
+			contentType: 'application/json; charset=UTF-8',
+			url: API_NEW_POST+post_file(title)+'.markdown',
+			type: "PUT",
+			data: JSON.stringify({
+				content: btoa(unescape(encodeURIComponent(p_body))),
+				message: 'posted via web',
+				branch: '{{ site.github.branch }}'
+			}),
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader("Authorization", "Basic " + btoa(user+":"+password));
+			},
+			success: function(data) {
+				posted_ok = true ;
+				$('#container1').html('<h2>Successfully posted to {{ site.title }}</h2') ;
+			},
+			error: function(request, status, error) {
+				responseText = jQuery.parseJSON( request.responseText );
+				$('#messages').append($('<div class="alert alert-danger alert-dismissible" role="alert">')
+				.append('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
+				.append('<strong>' + request.status + '</strong>: ' + responseText.message )
+				.append('<br>If you are using two-factor authentication, you will have to create ')
+				.append('<a href="https://github.com/settings/tokens">a personal access token</a> with "repo" permissions and use this instead of your password.')
+				.append('</div>'));
+			},
+		});
 	});
 
 	query_params = get_query();
@@ -182,6 +180,5 @@
 		}
 		$('#p_body').val(src_body) ;
 	}
-
 	</script>
 </body>
